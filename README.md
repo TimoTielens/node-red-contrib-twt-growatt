@@ -19,6 +19,12 @@ Always use node-red-dev validate to validate before publish https://www.npmjs.co
 
 
 
+### Future support
+historyLastStartDate	new Date()	yesterday	The start time for retrieving the history.
+historyLastEndDate	new Date()	tomorrow	The end time for retrieving the history.
+historyStart	Integer	0	The server does not send all data for the time range. With the starting index you get the next rows.
+faultlogdate	String	'YYYY'	It is only taken into account if faultlog is true. It must be a string with the date in 'YYYY', 'YYYY-MM', 'YYYY-MM-DD'.
+
 
 [buildstatus-shield]: https://img.shields.io/github/actions/workflow/status/TimoTielens/node-red-contrib-twt-growatt/ci.yml?branch=main&style=for-the-badge
 [buildstatus-link]: https://github.com/TimoTielens/node-red-contrib-twt-growatt/actions

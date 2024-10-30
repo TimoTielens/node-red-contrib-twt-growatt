@@ -4,7 +4,7 @@
           "name": "Name",
           "username": "User",
           "password": "Pasword",
-          "key": "Key"
+          "key": "API-Token"
         }
     }
 }

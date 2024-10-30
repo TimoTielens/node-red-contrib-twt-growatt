@@ -7,6 +7,8 @@
           "optionplantdata": "plantData: Calls the description dataset of the plant.",
           "optiondevicedata": "deviceData: Calls the description dataset of the plantdevice.",
           "optionweather": "weather: Calls the weather dataset of the plant.",
+          "optionfaultlog": "faultlog: True retrieves the plant's fault logs. An array with the most recent event first is returned.",
+          "optionfaultlogdateindex": "faultlogdateindex: It is only taken into account if faultlog is true. The array is converted into timestampsobjects.",
           "optiontotaldata": "totalData: Retrieves the data integrals. The sums since start time.",
           "optionstatusdata": "statusData: This is not available for all systems.",
           "optiondevicetyp": "deviceTyp: Add the device typ to the Output.",

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('growatt-config',{
+  RED.nodes.registerType('growatt-config', {
     category: 'config',
     color: '#5AC300',
     defaults: {
@@ -7,7 +7,8 @@
       username: {value:""}
     },
     credentials: {
-      password: {type:"text"}
+      password: {type:"text"},
+      key: {type:"text"}
     },
     inputs: 0,
     outputs: 0,
@@ -19,7 +20,8 @@
   });
 </script>
 
-<script type="text/html" data-template-name="growatt-config">
+<script type="text/html" data-template-name="node-red-twt-growatt-config">
+
   <div class="form-row">
     <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="growatt.label.name"></span></label>
     <input type="text" id="node-config-input-name" placeholder="Name">
@@ -35,8 +37,10 @@
     <input type="password" id="node-config-input-password">
   </div>
 
+  <hr />
+
   <div class="form-row">
-    <label for="node-config-input-key"><i class="fa fa-key"></i> <span data-i18n="growatt.label.key"></span></label>
+    <label for="node-config-input-key"><i class="fa fa-fingerprint"></i> <span data-i18n="growatt.label.key"></span></label>
     <input type="password" id="node-config-input-key">
   </div>
 

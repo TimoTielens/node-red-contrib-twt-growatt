@@ -1,25 +1,28 @@
 module.exports = function(RED) {
     const api = require('growatt')
-    api.setDebugApi(false);
+    const growatt = new api({})
   
-    async function pullData(node, config) {
-      const growatt = new api({})
-      
-      let login;
-      if(node.confignode.key !== undefined)
+    async function Authenticate(node, config)
+    {
+      if (!growatt.isConnected()) 
       {
-        login = await growatt.sharePlantLogin(node.confignode.key).catch(e => {node.error(e)})
+        if(node.confignode.key !== undefined)
+        {
+          await growatt.sharePlantLogin(node.confignode.key).catch(e => {node.error(e)})
+        }
+        else if(node.confignode.username !== undefined && node.confignode.password !== undefined)
+        {
+          await growatt.login(node.confignode.username,node.confignode.password).catch(e => {node.error(e)})
+        }
+        else
+        {
+          await await growatt.demoLogin().catch(e => {node.error(e)})
+        }
       }
-      else if(node.confignode.username !== undefined && node.confignode.password !== undefined)
-      {
-        login = await growatt.login(node.confignode.username,node.confignode.password).catch(e => {node.error(e)})
-      }
-      else
-      {
-        login = await await growatt.demoLogin().catch(e => {node.error(e)})
-      }
+    }
 
-      if (login !== undefined) {
+    async function pullData(node, config) 
+    {
         let options = {
           plantData: config.optionplantdata,
           deviceData: config.optiondevicedata,
@@ -39,8 +42,6 @@ module.exports = function(RED) {
             "payload": await growatt.getAllPlantData(options).catch(e => {node.error(e)})
         }
         node.send(msg);
-        let logout = await growatt.logout().catch(e => {node.error(e)})
-      }
     }
   
     function GrowattNode(config) {
@@ -56,10 +57,78 @@ module.exports = function(RED) {
       // Act on incomming messages
       node.on('input', function(msg) {
         if (node.confignode != undefined) {
-          pullData(node, config)
+          Authenticate(node, config)
+          .then(pullData(node, config));       
         }
       })
     }
   
-    RED.nodes.registerType("growatt",GrowattNode);
+    function GetLoggers(config) {
+      RED.nodes.createNode(this,config);
+      const node = this;
+  
+      // Retrieve the config node
+      node.confignode = RED.nodes.getNode(config.confignode);
+      if (node.confignode == undefined) {
+        node.log("No configuration found.");
+      }
+  
+      // Act on incomming messages
+      node.on('input', function(msg) {
+        if (node.confignode != undefined) {
+          Authenticate(node, config)
+          .then(async function() => 
+            let msg = {
+              "_msgid": RED.util.generateId(),
+              "payload": await growatt.getDataLoggers().catch(e => {node.error(e)})
+          }
+          node.send(msg);
+    
+          
+        }
+      })
+    }
+
+    function ReadLoggerRegister(config) {
+      RED.nodes.createNode(this,config);
+      const node = this;
+  
+      // Retrieve the config node
+      node.confignode = RED.nodes.getNode(config.confignode);
+      if (node.confignode == undefined) {
+        node.log("No configuration found.");
+      }
+  
+      // Act on incomming messages
+      node.on('input', function(msg) {
+        if (node.confignode != undefined) {
+          Authenticate(node, config);
+          pullData(node, config)
+        }
+      })
+    }
+
+    function WriteLoggerRegister(config) {
+      RED.nodes.createNode(this,config);
+      const node = this;
+  
+      // Retrieve the config node
+      node.confignode = RED.nodes.getNode(config.confignode);
+      if (node.confignode == undefined) {
+        node.log("No configuration found.");
+      }
+  
+      // Act on incomming messages
+      node.on('input', function(msg) {
+        if (node.confignode != undefined) {
+          Authenticate(node, config);
+          pullData(node, config)
+        }
+      })
+    }
+
+    RED.nodes.registerType("Growatt get data",GrowattNode);
+    RED.nodes.registerType("Growatt datalogger - Get loggers",GetLoggers);
+    RED.nodes.registerType("Growatt datalogger - Register read",ReadLoggerRegister);
+    RED.nodes.registerType("Growatt datalogger - Register write",WriteLoggerRegister);
   }

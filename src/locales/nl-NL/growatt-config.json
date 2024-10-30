@@ -1,10 +1,10 @@
 {
   "growatt" : {
       "label" : {
-        "name": "Name",
-        "username": "User",
-        "password": "Pasword",
-        "key": "Key"
+        "name": "Naam",
+        "username": "Gebruikersnaam",
+        "password": "Wachtwoord",
+        "key": "API-Sleutel"
       }
   }
 }
