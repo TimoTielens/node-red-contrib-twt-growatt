@@ -1,0 +1,32 @@
+{
+  "name": "@twt/node-red-growatt",
+  "version": "0.1.0",
+  "description": "Node-RED module that can be used to contact the Growatt server",
+  "main": "node-red-twt-growatt.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimoTielens/node-red-contrib-twt-growatt.git"
+  },
+  "keywords": [
+    "node-red",
+    "growatt"
+  ],
+  "engines": {
+    "node": ">=18.2.0"
+  },
+  "dependencies": {
+    "growatt": "^0.7.7"
+  },
+  "author": "Timo Tielens",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TimoTielens/node-red-contrib-twt-growatt/issues"
+  },
+  "homepage": "https://github.com/TimoTielens/node-red-contrib-twt-growatt#readme",
+  "node-red" : {
+        "version": ">=4.0.0",
+        "nodes": {
+            "src": "node-red-twt-growatt.js"
+        }
+    }
+}
