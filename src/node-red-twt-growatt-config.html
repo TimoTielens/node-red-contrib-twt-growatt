@@ -4,16 +4,16 @@
     color: '#5AC300',
     defaults: {
       name: {value:"Growatt credentials"},
-      username: {value:""}
     },
     credentials: {
-      password: {type:"text"},
-      key: {type:"text"}
+      username:{type:"text"},
+      password: {type:"password"},
+      token: {type:"password"}
     },
     inputs: 0,
     outputs: 0,
     outputLabels: [],
-    icon: "font-awesome/fa-mobile",
+    icon: "font-awesome/fa-sun-o",
     label: function() {
         return this.name || "Growatt credentials";
     }
@@ -40,7 +40,7 @@
   <hr />
 
   <div class="form-row">
-    <label for="node-config-input-key"><i class="fa fa-fingerprint"></i> <span data-i18n="growatt.label.key"></span></label>
+    <label for="node-config-input-key"><i class="fa fa-fingerprint"></i> <span data-i18n="growatt.label.token"></span></label>
     <input type="password" id="node-config-input-key">
   </div>
 

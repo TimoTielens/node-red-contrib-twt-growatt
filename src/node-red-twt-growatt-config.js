@@ -1,17 +1,18 @@
 module.exports = function(RED) {
 
-  function GrowattConfigNode(n) {
-    RED.nodes.createNode(this,n);
+  function ConfigNode(n) {
+    RED.nodes.createNode(this, n);
     this.name = n.name;
-    this.username = n.username;
+    this.username = this.credentials.username;
     this.password = this.credentials.password;
-    this.key = this.credentials.key;
+    this.token = this.credentials.token;
   }
 
-  RED.nodes.registerType("growatt-config",GrowattConfigNode, {
+  RED.nodes.registerType("growatt-config", ConfigNode, {
     credentials: {
-      password: {type:"text"},
-      key: {type:"text"}
+      username: {type:"text"},
+      password: {type:"password"},
+      token: {type:"password"}
     }
   });
 }

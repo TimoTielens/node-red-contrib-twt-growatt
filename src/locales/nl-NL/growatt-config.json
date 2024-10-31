@@ -4,7 +4,7 @@
         "name": "Naam",
         "username": "Gebruikersnaam",
         "password": "Wachtwoord",
-        "key": "API-Sleutel"
+        "token": "API-Sleutel"
       }
   }
 }
