@@ -128,9 +128,9 @@ module.exports = function(RED) {
     {
       if (!growatt.isConnected()) 
       {
-        if(node.confignode.key !== undefined)
+        if(node.confignode.token !== undefined)
         {
-          await growatt.sharePlantLogin(node.confignode.key).catch(e => {node.error(e)})
+          await growatt.sharePlantLogin(node.confignode.token).catch(e => {node.error(e)})
         }
         else if(node.confignode.username !== undefined && node.confignode.password !== undefined)
         {
